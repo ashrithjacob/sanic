@@ -5,3 +5,9 @@
 
 ## Example output:
 ![alt text](../images/composite_image.png)
+
+## How to run:
+Run the following commands:
+- `pip3 install -r requirements.txt` (install packages)
+- `python3 src/main.py` (start sanic server - image rendered at root url)
+
