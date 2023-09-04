@@ -12,7 +12,7 @@ TOTAL_IMAGES = 132
 THUMBNAIL_SIZE = (32, 32)
 
 
-def get_image_url_list(limit, offset):
+async def get_image_url_list(limit, offset):
     # Send an HTTP GET request to the API endpoint
     response = requests.get(f"{API_URL}?limit={limit}&offset={offset}")
     # Check if the request was successful (status code 200)
@@ -46,7 +46,7 @@ async def download_images(api_url, total_images):
 
         while remaining_images > 0:
             current_limit = min(remaining_images, limit)
-            image_url = get_image_url_list(limit=current_limit, offset=offset)
+            image_url = await get_image_url_list(limit=current_limit, offset=offset)
             tasks = [fetch_image(session, image_url[i]) for i in range(current_limit)]
             batch_images = await asyncio.gather(*tasks)
             images.extend(batch_images)
